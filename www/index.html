@@ -112,7 +112,7 @@
           <div class="button-bar__item">
             <input type="radio" name="status_buttons" ng-click="loadflagstab();">
             <button class="button-bar__button" ng-if="alertnoflag">Flags</button>
-            <button class="button-bar__button" id="alert" ng-if="alertnoflag == false">Flags</button>
+            <button class="button-bar__button alert" ng-if="alertnoflag == false">Flags</button>
           </div>
           <div class="button-bar__item">
             <input type="radio" name="status_buttons" ng-click="loadiotab();">
@@ -1076,47 +1076,53 @@
       <div class="lastupdatedvalue">{{lastupdated}}</div>
       <div class="lastupdatedlabel">Current mode: </div>
       <div class="lastupdatedvalue">{{currentMode}}</div>
-      <div class="relayheader" ng-if="mainenabled">Main Box</div>
-      <div ng-if="mainenabled" ng-repeat="n in [1,2,3,4,5,6,7,8]">
-        <div class="relaylabel"><span ng-bind="r{{n}}n"></span></div>
-        <div class="cvarvalue">
-          <div class="button-bar relaybuttons">
-            <div class="button-bar__item">
-              <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}on" ng-click="changerelay(n,1)">
-              <button class="button-bar__button" ng-class="r{{n}}onclass">On</button>
+      <div class="relaycontainer">
+        <div class="relayexpansion">
+          <div class="relayheader" ng-if="mainenabled">Main Box</div>
+          <span ng-if="mainenabled" ng-repeat="n in [1,2,3,4,5,6,7,8]">
+            <div class="relayrow">
+              <div class="relaylabel"><span ng-bind="r{{n}}n"></span></div>
+              <div class="button-bar relaybuttons cvarvalue">
+                <div class="button-bar__item">
+                  <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}on" ng-click="changerelay(n,1)">
+                  <button class="button-bar__button" ng-class="r{{n}}onclass">On</button>
+                </div>
+                <div class="button-bar__item">
+                  <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}off" ng-click="changerelay(n,0)">
+                  <button class="button-bar__button" ng-class="r{{n}}offclass">Off</button>
+                </div>
+                <div class="button-bar__item">
+                  <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}auto" ng-click="changerelay(n,2)">
+                  <button class="button-bar__button" ng-class="r{{n}}autoclass">Auto</button>
+                </div>
+              </div>
             </div>
-            <div class="button-bar__item">
-              <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}off" ng-click="changerelay(n,0)">
-              <button class="button-bar__button" ng-class="r{{n}}offclass">Off</button>
-            </div>
-            <div class="button-bar__item">
-              <input type="radio" name="relaybuttons{{n}}" ng-checked="r{{n}}auto" ng-click="changerelay(n,2)">
-              <button class="button-bar__button" ng-class="r{{n}}autoclass">Auto</button>
-            </div>
-          </div>
+          </span>
         </div>
-      </div>
-      <div ng-show="expansionenabled" ng-repeat="n in [1,2,3,4,5,6,7,8]">
-        <div class="relayheader" ng-show="exp{{n}}enabled">Expansion Box {{n}}</div>
-        <div ng-show="exp{{n}}enabled" ng-repeat="m in [1,2,3,4,5,6,7,8]">
-          <div class="relaylabel"><span ng-bind="r{{n}}{{m}}n"></span></div>
-          <div class="cvarvalue">
-            <div class="button-bar relaybuttons">
-              <div class="button-bar__item">
-                <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}on" ng-click="changerelay((n*10)+m,1)">
-                <button class="button-bar__button" ng-class="r{{n}}{{m}}onclass">On</button>
+        <span ng-show="expansionenabled" ng-repeat="n in [1,2,3,4,5,6,7,8]">
+          <div class="relayexpansion">
+            <div class="relayheader" ng-show="exp{{n}}enabled">Expansion Box {{n}}</div>
+            <span ng-show="exp{{n}}enabled" ng-repeat="m in [1,2,3,4,5,6,7,8]">
+              <div class="relayrow">
+                <div class="relaylabel"><span ng-bind="r{{n}}{{m}}n"></span></div>
+                <div class="button-bar relaybuttons cvarvalue">
+                  <div class="button-bar__item">
+                    <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}on" ng-click="changerelay((n*10)+m,1)">
+                    <button class="button-bar__button" ng-class="r{{n}}{{m}}onclass">On</button>
+                  </div>
+                  <div class="button-bar__item">
+                    <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}off" ng-click="changerelay((n*10)+m,0)">
+                    <button class="button-bar__button" ng-class="r{{n}}{{m}}offclass">Off</button>
+                  </div>
+                  <div class="button-bar__item">
+                    <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}auto" ng-click="changerelay((n*10)+m,2)">
+                    <button class="button-bar__button" ng-class="r{{n}}{{m}}autoclass">Auto</button>
+                  </div>
+                </div>
               </div>
-              <div class="button-bar__item">
-                <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}off" ng-click="changerelay((n*10)+m,0)">
-                <button class="button-bar__button" ng-class="r{{n}}{{m}}offclass">Off</button>
-              </div>
-              <div class="button-bar__item">
-                <input type="radio" name="relaybuttons{{n}}{{m}}" ng-checked="r{{n}}{{m}}auto" ng-click="changerelay((n*10)+m,2)">
-                <button class="button-bar__button" ng-class="r{{n}}{{m}}autoclass">Auto</button>
-              </div>
-            </div>
+            </span>
           </div>
-        </div>
+        </span>
       </div>
       <br>
     </div>
