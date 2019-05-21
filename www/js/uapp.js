@@ -2211,7 +2211,7 @@ function onConnectionLost(response) {
 	console.log("Connection Lost: code=" + response.errorCode + ", message=" + response.errorMessage);
 	setConnectionLost();
 	// If connection times out, try to reconnect
-	if (response.errorCode == 7) MQTTconnect();
+	if (response.errorCode == 5 || response.errorCode == 7 || response.errorCode == 8) MQTTconnect();
 };
 
 function setConnectionLost() {
