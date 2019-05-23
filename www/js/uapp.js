@@ -2277,6 +2277,9 @@ function onMessageArrived(message) {
 	else
 		UpdateCloudParam(message, 1, 0);
 
+	if (oldsf === undefined) oldsf=json.RA.SF;
+	if (oldaf === undefined) oldaf=json.RA.AF;
+
 	if (payload.match(/R(ON|OFF)?\d?:.*/g))
 	{
 		CheckRelay(relayscope);
